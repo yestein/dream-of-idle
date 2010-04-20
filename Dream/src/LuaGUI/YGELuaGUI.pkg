@@ -1,0 +1,25 @@
+$#include "YGELuaUIWnd.h"  
+class YGELuaUIWnd
+{
+public:
+
+  YGELuaUIWnd( );
+  YGELuaUIWnd( const char* fileName );
+  ~YGELuaUIWnd( );
+  bool	Load			( void );
+  void	Reload			( void );
+  void	Hide			( void );
+  void	Show			( void );
+  bool	IsVisible		( void );
+  void	RegisterEvent		( const char* commentName, const char* EventName, const char* funName, int EventType );
+  void	RegisterFunction	( const char* funcName, const char* LuaFuncName , int input );
+  void	SetCommentPosition	( const char* commentName, float PositionX, float PositionY );
+  void	SetCommentWidth		( const char* commentName, float width );
+  void	SetCommentHeight	( const char* commentName, float height );
+  void	ShowComment		( const char* commentName );
+  void	HideComment		( const char* commentName );
+  bool	IsCommentShow		( const char* commentName );
+  float	GetCommentWidth		( const char* commentName );
+  float	GetcommentHeight	( const char* commentName );
+
+};
