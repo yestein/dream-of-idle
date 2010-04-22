@@ -8,7 +8,7 @@ purpose:	Create First Win32 Window
 
 #include "Sample.h"
 #include "Sprite.h"
-#include "cegui\CEGUI.h"
+#include "CEGUI.h"
 
 int WINAPI WinMain(HINSTANCE hInst,HINSTANCE hPrevInst,LPSTR lpCmdLine,int nCmdShow)
 {
@@ -139,6 +139,9 @@ bool YGEGame::DoRender( float timeElapse )
 	HRESULT coop;
 	coop = m_pRenderer->m_pDirect3DDevice->TestCooperativeLevel();
 
+	CEGUI::System& guiSystem = CEGUI::System::getSingleton();
+	guiSystem.injectTimePulse(timeElapse);
+
 	if (coop == D3DERR_DEVICELOST)
 	{
 		Sleep(500);
@@ -149,29 +152,16 @@ bool YGEGame::DoRender( float timeElapse )
 
 	}
 
+	// draw display
 	if (FAILED(m_pRenderer->m_pDirect3DDevice->BeginScene()))
 	{
 		return false;
 	}
-	CEGUI::System& guiSystem = CEGUI::System::getSingleton();
-	guiSystem.injectTimePulse(timeElapse);
-	char fpsbuff[16];
-	sprintf(fpsbuff, "FPS: %d", 50);
 
-	// draw display
-	m_pRenderer->m_pDirect3DDevice->Clear(0, 0, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+	m_pRenderer->m_pDirect3DDevice->Clear(0, 0, D3DCLEAR_TARGET,
+		D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
 	guiSystem.renderGUI();
-
-	// render FPS:
-	CEGUI::Font* fnt = guiSystem.getDefaultFont();
-	if (fnt)
-	{
-		guiSystem.getRenderer()->setQueueingEnabled(false);
-		fnt->drawText(fpsbuff, CEGUI::Vector3(0, 0, 0), guiSystem.getRenderer()->getRect());
-	}
-
 	m_pRenderer->m_pDirect3DDevice->EndScene();
-
 	m_pRenderer->m_pDirect3DDevice->Present(0, 0, 0, 0);
 
 	return true;

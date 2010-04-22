@@ -10,7 +10,7 @@
 	purpose:	Create a Render by Direct3D 9
 ************************************************************************/
 #include "YGED3D9Renderer.h"
-#include "cegui/CEGUI.h"
+#include "CEGUI.h"
 
 YGED3D9Renderer::YGED3D9Renderer( ):
 m_pDirect3D( NULL ),
@@ -87,7 +87,7 @@ bool YGED3D9Renderer::Initialise( )
 		::MessageBox( 0, YGED3D::CREATE_D3DDEVICE_ERROR, 0, MB_ICONERROR|MB_OK );
 		return FALSE;
 	}
-	m_pCeguiD3D9Renderer = new CEGUI::DirectX9Renderer( m_pDirect3DDevice, 3000 );
+	m_pCeguiD3D9Renderer = &CEGUI::Direct3D9Renderer::create( m_pDirect3DDevice );
 	return TRUE;
 }
 
@@ -116,12 +116,12 @@ bool YGED3D9Renderer::DoRender( float timeElapse )
 	guiSystem.renderGUI();
 
 	// render FPS:
-	CEGUI::Font* fnt = guiSystem.getDefaultFont();
-	if (fnt)
-	{
-		guiSystem.getRenderer()->setQueueingEnabled(false);
-		fnt->drawText(fpsbuff, CEGUI::Vector3(0, 0, 0), guiSystem.getRenderer()->getRect());
-	}
+// 	CEGUI::Font* fnt = guiSystem.getDefaultFont();
+// 	if (fnt)
+// 	{
+// 		guiSystem.getRenderer()->setQueueingEnabled(false);
+// 		fnt->drawText(fpsbuff, CEGUI::Vector3(0, 0, 0), guiSystem.getRenderer()->getRect());
+// 	}
 	m_pDirect3DDevice->EndScene();
 	m_pDirect3DDevice->Present(0, 0, 0, 0);
 	return true;

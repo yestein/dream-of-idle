@@ -8,7 +8,7 @@ purpose:	A Adapter for Cegui
 #ifndef _YGE_CEGUI_ADAPTER_H
 #define _YGE_CEGUI_ADAPTER_H
 
-#include "cegui/CEGUI.h"
+#include "CEGUI.h"
 #include "YGERenderer.h"
 
 class YGECEGUIAdpater
