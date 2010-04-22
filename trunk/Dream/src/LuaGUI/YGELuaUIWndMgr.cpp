@@ -24,15 +24,15 @@ YGELuaUIWndMgr* YGELuaUIWndMgr::ms_Singleton = NULL;
 //========================================
 void YGELuaUIWndMgr::initialize( void )
 {
-	WindowManager& winMgr = WindowManager::getSingleton( );
-	SchemeManager::getSingleton( ).loadScheme( "TaharezLook.scheme" );
-	System::getSingleton( ).setDefaultMouseCursor( "TaharezLook", "MouseArrow" );
-	if( !FontManager::getSingleton( ).isFontPresent( "Commonwealth-10" ) )
-	{
-		FontManager::getSingleton( ).createFont( "Commonwealth-10.font" );
-	}
+	using namespace CEGUI;
+
+	WindowManager& winMgr = WindowManager::getSingleton();
+	SchemeManager::getSingleton().create("TaharezLook.scheme");
+	System::getSingleton().setDefaultMouseCursor("TaharezLook", "MouseArrow");
+	FontManager::getSingleton().create("DejaVuSans-10.font");
+
 	m_RootWnd = winMgr.createWindow("DefaultWindow", "root" );
-	CEGUI::System::getSingleton( ).setGUISheet( m_RootWnd );
+ 	CEGUI::System::getSingleton( ).setGUISheet( m_RootWnd );
 }
 //========================================
 //	KLuaUI：读取脚本文件

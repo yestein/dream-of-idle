@@ -14,7 +14,7 @@
 //------------------------------------------------------------------------
 #include "YGERenderer.h"
 #include "YGECEGUIAdapter.h"
-#include "RendererModules/directx9GUIRenderer/d3d9renderer.h"
+#include "RendererModules/Direct3D9/CEGUIDirect3D9Renderer.h"
 #include "CEGUIDefaultResourceProvider.h"
 //------------------------------------------------------------------------
 class YGED3D9Renderer: public YGERenderer
@@ -36,7 +36,7 @@ public:
 	LPDIRECT3DDEVICE9	m_pDirect3DDevice;
 	D3DDEVTYPE			m_DeviceType;
 	unsigned int		m_AdapterType;
-	CEGUI::DirectX9Renderer* m_pCeguiD3D9Renderer;
+	CEGUI::Direct3D9Renderer* m_pCeguiD3D9Renderer;
 	
 private:
 	

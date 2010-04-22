@@ -167,7 +167,7 @@ bool YGEApplication::InitGUISystem( )
 	if( !m_pRenderer->m_pCeguiD3D9Renderer  )
 		return false;
 
-	new CEGUI::System( m_pRenderer->m_pCeguiD3D9Renderer );
+	CEGUI::System::create( *m_pRenderer->m_pCeguiD3D9Renderer );
 
 	// initialise the required dirs for the DefaultResourceProvider
 	CEGUI::DefaultResourceProvider* rp = static_cast<CEGUI::DefaultResourceProvider*>
@@ -199,17 +199,21 @@ bool YGEApplication::InitGUISystem( )
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 
 
+	// set the default resource groups to be used
 	CEGUI::Imageset::setDefaultResourceGroup("imagesets");
 	CEGUI::Font::setDefaultResourceGroup("fonts");
 	CEGUI::Scheme::setDefaultResourceGroup("schemes");
 	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
 	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
 	CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
-#ifdef CEGUI_WITH_XERCES
-	CEGUI::XercesParser::setSchemaDefaultResourceGroup("schemas");
-#endif
-	new YGELuaUIWndMgr( );
-	YGELuaUIWndMgr::getSingleton( ).LoadScript( "..\\..\\datafiles\\lua_scripts\\demo7.lua" );
+
+	// setup default group for validation schemas
+	CEGUI::XMLParser* parser = CEGUI::System::getSingleton().getXMLParser();
+	if (parser->isPropertyPresent("SchemaDefaultResourceGroup"))
+		parser->setProperty("SchemaDefaultResourceGroup", "schemas");    
+
+ 	new YGELuaUIWndMgr( );
+ 	YGELuaUIWndMgr::getSingleton( ).LoadScript( "..\\..\\datafiles\\lua_scripts\\demo7.lua" );
 
 	return true;	
 }

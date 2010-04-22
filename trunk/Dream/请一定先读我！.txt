@@ -1,0 +1,11 @@
+Create by Yu Lei
+
+
+关于第三方库
+
+1. 将dependencies目录下的lib文件夹里的Dynamic.rar解压缩至当前目录
+2. 将dependencies目录下的bin文件夹里Debug.rar和Release.rar的内容解压缩至当前目录，并拷贝至根目录下bin目录里头
+
+2. 根目录下的Sample为CEGUI自带的Sample例子，与本工程无关
+
+3. CEGUI的Solution及工程已建好，为VC9，请不要擅自重建（因为更改过lib的生成路径），否则可能出现路径混乱
