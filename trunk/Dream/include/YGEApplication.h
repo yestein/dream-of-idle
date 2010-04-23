@@ -24,11 +24,11 @@ public:
 	~YGEApplication( ){}
 
 	HWND	CreateWnd( HINSTANCE hInst, LPCTSTR szAppName, LPCTSTR szWndTitleName, int width, int height, bool bWindowed );
-	bool	RegisterWndClass( HINSTANCE hInst, LPCTSTR szAppName );
 	bool	InitRenderer( void );
 	bool	InitGUISystem( void );
 	bool	ReleaseRender( void );
 
+	virtual int	HandleInput( UINT Message,WPARAM wParam,LPARAM lParam ) = 0;
 	virtual bool Init( ) = 0;
 	virtual bool Loop( ) = 0;
 	virtual bool Exit( ) = 0;
@@ -50,8 +50,6 @@ public:
 
 private:
 
-	static LRESULT CALLBACK wndProc(HWND hWnd,UINT Message,WPARAM wParam,LPARAM lParam );
-
 private:
 
 protected:
@@ -61,8 +59,7 @@ protected:
 	unsigned int		m_uWidth;
 	unsigned int		m_uHeight;	
 	YGED3D9Renderer*	m_pRenderer;
-	YGECEGUIAdpater*	m_pAdapter;
-	
+
 };
 //-------------------------YGE_APPLICATION_H-----------------------------------------
 #endif 

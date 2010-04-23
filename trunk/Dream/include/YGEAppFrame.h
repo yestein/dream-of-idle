@@ -49,13 +49,23 @@ public:
 public:
 	
 private:
-
 	static LRESULT CALLBACK wndProc(HWND hWnd,UINT Message,WPARAM wParam,LPARAM lParam );
 
+	static void	mouseEnter( void );
+	static void	mouseLeave( void );
+	static UINT virtualKeyToScanCode( WPARAM wParam, LPARAM lParam ); 
+	static bool setIMEFollow( HWND hWnd );  
+	static bool getFocusedInputBoxCoord( POINT& point, float& height );
+	static bool InjectUnicode( CEGUI::utf32 code_point );
+
 	bool	doWin32Event( bool& idle );
+	bool	registerWndClass( HINSTANCE hInst, LPCTSTR szAppName );
 
 private:
-	YGEApplication*	m_pApplication;
+
+	static YGEApplication*	ms_pApplication;
+	static bool		ms_bMouseInWindow;
+
 	HINSTANCE		m_hInstance;
 	HINSTANCE		m_hPrevInst;
 	HWND			m_wndMain;

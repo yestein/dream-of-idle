@@ -1,3 +1,12 @@
+/************************************************************************
+	filename: 	Sprite.cpp
+	created:	2010/3/21
+	author:		Yu Lei(nl-nl-@163.com)
+	<change list>
+	1. create file (Yu Lei)
+
+	purpose:	Sprite API
+************************************************************************/
 #include "Sprite.h"
 
 Sprite::Sprite( )
@@ -7,10 +16,6 @@ Sprite::Sprite( )
 		seq[i] = i;
 	}
 	Initial(65,94,50,50,DOWN,seq,4);
-}
-Map::Map( )
-{
-	Initial( 640 , 480 );
 }
 void Sprite::Initial(int width,int height,int x,int y,int d,int *seq,int n)
 {
@@ -94,4 +99,8 @@ bool Sprite::CheckForEdge(int dir,int pixel,int H,int W)
 			return false;
 	}
 	return false;
+}
+Map::Map( )
+{
+	Initial( 640 , 480 );
 }

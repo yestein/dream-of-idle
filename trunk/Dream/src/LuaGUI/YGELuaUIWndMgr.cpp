@@ -11,7 +11,7 @@
 ************************************************************************/
 
 #include "YGELuaUIWndMgr.h"
-
+#include "YGEWin32.h"
 using namespace CEGUI;
 /*************************************************************************
 	Static Data Definitions
@@ -26,13 +26,13 @@ void YGELuaUIWndMgr::initialize( void )
 {
 	using namespace CEGUI;
 
-	WindowManager& winMgr = WindowManager::getSingleton();
-	SchemeManager::getSingleton().create("TaharezLook.scheme");
-	System::getSingleton().setDefaultMouseCursor("TaharezLook", "MouseArrow");
-	FontManager::getSingleton().create("DejaVuSans-10.font");
-
+	WindowManager& winMgr = WindowManager::getSingleton( );
+	SchemeManager::getSingleton( ).create("TaharezLook.scheme");
+	System::getSingleton( ).setDefaultMouseCursor("TaharezLook", "MouseArrow");
+	FontManager::getSingleton( ).create("msyhbd.font");
+	CEGUI::System::getSingleton( ).setDefaultFont( "msyhbd");
 	m_RootWnd = winMgr.createWindow("DefaultWindow", "root" );
- 	CEGUI::System::getSingleton( ).setGUISheet( m_RootWnd );
+	CEGUI::System::getSingleton( ).setGUISheet( m_RootWnd );
 }
 //========================================
 //	KLuaUI：读取脚本文件

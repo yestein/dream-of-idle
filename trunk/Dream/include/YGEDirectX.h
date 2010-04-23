@@ -150,21 +150,33 @@ public:
 
 	//功能函数声明
 	BOOL InitDDraw( HWND hWd,bool bFScr,DWORD ScrW,DWORD ScrH,DWORD BitCount) ;
-
+#ifndef UNICODE
 	BOOL LoadBMPSurface(  //将BitmapFile 指定的位图格式图像载入到刚刚指定的表面
 		LPDIRECTDRAWSURFACE7 &lpSurf,  //要载入的表面的指针
 		LPCSTR BitmapFile );   //图像的路径
+#else
+	BOOL LoadBMPSurface(  //将BitmapFile 指定的位图格式图像载入到刚刚指定的表面
+		LPDIRECTDRAWSURFACE7 &lpSurf,  //要载入的表面的指针
+		LPCWSTR BitmapFile );   //图像的路径
+#endif
 
 	BOOL CreateNULLSurface(    //创建指定的表面，是空表面
 		LPDIRECTDRAWSURFACE7 &lpSurf,   //要创建的表面指针
 		LONG W,LONG H,   //要创建的表面的宽与高
 		DWORD MemoryFlag);   //表面图像的存储方式
-
+#ifndef UNICODE
 	BOOL CreateBMPSurface(   //创建指定的表面，并将指定的位图格式图像载入刚刚创建的表面
 		LPDIRECTDRAWSURFACE7 &lpSurf,   //要载入位图的表面指针
 		LONG W,LONG H,    //创建的表面的宽和高
 		LPCSTR BitmapFile,   //图像的路径
 		DWORD MemoryFlag);    //图像的存储格式
+#else
+	BOOL CreateBMPSurface(   //创建指定的表面，并将指定的位图格式图像载入刚刚创建的表面
+		LPDIRECTDRAWSURFACE7 &lpSurf,   //要载入位图的表面指针
+		LONG W,LONG H,    //创建的表面的宽和高
+		LPCWSTR BitmapFile,   //图像的路径
+		DWORD MemoryFlag);    //图像的存储格式
+#endif
 
 	HRESULT Blit(   //将pRtSrc指定的在源表面ss上的图片复制到lpSurfDest指定的目标表面
 		LPDIRECTDRAWSURFACE7 lpSurfDest,  //目标表面指针

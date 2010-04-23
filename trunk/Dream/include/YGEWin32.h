@@ -18,8 +18,10 @@
 		#include <windowsx.h>
 		#include <tchar.h>
 		#include <mmsystem.h>
+		#include <imm.h>
 
 		#pragma comment( lib,"winmm.lib" )
+		#pragma comment( lib, "imm32.lib" )
 
 //-------------------------Linux------------------------------------------
 	#endif
