@@ -286,12 +286,19 @@ BOOL YGEDDraw::InitDDraw( HWND hWd,bool bFScr,DWORD ScrW,DWORD ScrH,DWORD BitCou
 	return TRUE;
 }
 
-
+#ifndef UNICODE
 BOOL  YGEDDraw::CreateBMPSurface(   //创建指定的表面，并将指定的位图格式图像载入刚刚创建的表面
 							   LPDIRECTDRAWSURFACE7 &lpSurf,   //要载入位图的表面指针
 							   LONG W,LONG H,    //创建的表面的宽和高
 							   LPCSTR BitmapFile,   //图像的路径
 							   DWORD MemoryFlag)   //图像的存储格式
+#else
+BOOL  YGEDDraw::CreateBMPSurface(   //创建指定的表面，并将指定的位图格式图像载入刚刚创建的表面
+								 LPDIRECTDRAWSURFACE7 &lpSurf,   //要载入位图的表面指针
+								 LONG W,LONG H,    //创建的表面的宽和高
+								 LPCWSTR BitmapFile,   //图像的路径
+								 DWORD MemoryFlag)   //图像的存储格式
+#endif
 {
 	HBITMAP  hbm;   //设备相关位图的句柄，资源标识符,标志一个位图
 	BITMAP   bm;    //实例，是一种位图格式
@@ -369,10 +376,15 @@ BOOL YGEDDraw::CreateNULLSurface(    //创建指定的表面，是空表面
 	return TRUE;
 }
 
-
+#ifndef UNICODE
 BOOL YGEDDraw::LoadBMPSurface(  //将BitmapFile 指定的位图格式图像载入到刚刚指定的表面
 							LPDIRECTDRAWSURFACE7 &lpSurf,  //要载入的表面的指针
 							LPCSTR BitmapFile )   //图像的路径
+#else
+BOOL YGEDDraw::LoadBMPSurface(  //将BitmapFile 指定的位图格式图像载入到刚刚指定的表面
+							  LPDIRECTDRAWSURFACE7 &lpSurf,  //要载入的表面的指针
+							  LPCWSTR BitmapFile )   //图像的路径
+#endif
 {
 	HDC   hdcImage;
 	HDC   hdc;

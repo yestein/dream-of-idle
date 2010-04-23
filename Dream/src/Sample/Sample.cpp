@@ -1,9 +1,11 @@
 /************************************************************************
-filename: 	Sample.cpp
-created:	2010/3/5
-author:		Yulei
+	filename: 	Sample.cpp
+	created:	2010/3/5
+	author:		Yu Lei(nl-nl-@163.com)
+	<change list>
+	1. create file (Yu Lei)
 
-purpose:	Create First Win32 Window
+	purpose:	Create First Win32 Window
 ************************************************************************/
 
 #include "Sample.h"
@@ -24,8 +26,8 @@ int WINAPI WinMain(HINSTANCE hInst,HINSTANCE hPrevInst,LPSTR lpCmdLine,int nCmdS
 	AppParam.bShowMouse = true;
 	AppParam.uScreenHeight = 600;
 	AppParam.uScreenWidth = 800;
-	_tcsncpy( AppParam.szAppName, "Sample", DEFAULT_TITLE_NAME_LEN );
-	_tcsncpy( AppParam.szWndTitleName, "Hello World!", DEFAULT_TITLE_NAME_LEN );
+	_tcsncpy( AppParam.szAppName, (TCHAR*)"Sample", DEFAULT_TITLE_NAME_LEN );
+	_tcsncpy( AppParam.szWndTitleName, (TCHAR*)"Hello World!", DEFAULT_TITLE_NAME_LEN );
 
 	YGEAppFrame App;
 	App.CreateApplication( AppParam );
@@ -37,6 +39,25 @@ YGEGame::YGEGame( )
 // 	m_Sprite = new Sprite( );
 // 	m_Map = new Map( );
 // 	m_uLastTime = ::GetTickCount( );
+}
+int YGEGame::HandleInput( UINT Message,WPARAM wParam,LPARAM lParam )
+{
+	switch( Message )
+	{
+	case WM_CHAR:
+	case WM_LBUTTONDOWN:
+	case WM_LBUTTONUP:
+	case WM_RBUTTONDOWN:
+	case WM_RBUTTONUP:
+	case WM_MBUTTONDOWN:
+	case WM_MBUTTONUP:
+	case WM_MOUSEMOVE:
+	case WM_NCMOUSELEAVE:
+	case WM_MOUSELEAVE:
+	case 0x020A: // WM_MOUSEWHEEL:
+		break;
+	}
+	return 0;
 }
 bool YGEGame::Init( )
 {

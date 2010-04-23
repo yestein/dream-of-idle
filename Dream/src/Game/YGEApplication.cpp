@@ -26,69 +26,15 @@ const TCHAR	YGEApplication::INIT_GUI_SYSTEM_ERROR[] = _TEXT("Failed to Init GUI 
 // data files path
 const TCHAR	YGEApplication::DATA_FILES_PATH[]	= _TEXT("../../datafiles");
 
+
 YGEApplication::YGEApplication( ):
 m_pRenderer( NULL ),
 m_pThisWnd( NULL ),
+m_bWindowed( true ),
 m_uHeight( DEFAULT_WND_HEIGHT ),
 m_uWidth( DEFAULT_WND_WIDTH )
 {
 
-}
-/*************************************************************************
-	 Win32 'Window Procedure' function
-*************************************************************************/
-LRESULT YGEApplication::wndProc( HWND hWnd,UINT Message,WPARAM wParam,LPARAM lParam )
-{
-	switch(Message)
-	{
-		//窗口大小改变消息的处理
-	case WM_ACTIVATEAPP:
-		// 			bActive = (BOOL)wParam;
-		return 0;
-	case WM_SIZE:
-		//获取窗口客户区的屏幕坐标系位置
-		// 			GetClientRect( hWnd, &rectWin );
-		// 			ClientToScreen( hWnd, (LPPOINT)&rectWin );
-		// 			ClientToScreen( hWnd, (LPPOINT)&rectWin + 1 );
-		return 0;
-
-		//窗口位置改变消息的处理
-	case WM_MOVE:
-		//获取窗口客户区的屏幕坐标系位置
-		// 			GetClientRect( hWnd, &rectWin );
-		// 			ClientToScreen( hWnd, (LPPOINT)&rectWin );
-		// 			ClientToScreen( hWnd, (LPPOINT)&rectWin + 1 );
-		return 0;
-	case WM_DESTROY:
-		{
-			PostQuitMessage( 0 );
-			return 0;
-		}
-	default:
-        return DefWindowProc(hWnd, Message, wParam, lParam );
-	}
-}
-
-
-/*************************************************************************
-	Register a window Class
-*************************************************************************/
-bool YGEApplication::RegisterWndClass(HINSTANCE hInst,LPCTSTR szAppName)
-{
-	WNDCLASS WndClass;
-
-	WndClass.style         = CS_HREDRAW|CS_VREDRAW;
-	WndClass.lpfnWndProc   = wndProc;
-	WndClass.cbClsExtra    = 0;
-	WndClass.cbWndExtra    = 0;
-	WndClass.hInstance     = hInst;
-	WndClass.hIcon         = LoadIcon(NULL,IDI_APPLICATION);
-	WndClass.hCursor       = LoadCursor(NULL,IDC_ARROW);
-	WndClass.hbrBackground = GetStockBrush(BLACK_BRUSH);
-	WndClass.lpszMenuName  = NULL;
-	WndClass.lpszClassName = szAppName;
-
-	return ( RegisterClass( &WndClass ) != 0 );
 }
 
 
@@ -127,6 +73,7 @@ HWND YGEApplication::CreateWnd( HINSTANCE hInstance,
 	}
 	return m_pThisWnd;
 }
+
 /*************************************************************************
 	Init Render(D3D,OpenGL...)
 *************************************************************************/
@@ -176,7 +123,7 @@ bool YGEApplication::InitGUISystem( )
 	if( !rp )
 		return false;
 
-	const char* dataPathPrefix = DATA_FILES_PATH;
+	const TCHAR* dataPathPrefix = DATA_FILES_PATH;
 	char resourcePath[MAX_FILE_NAME_LENGTH];
 
 	// for each resource type, set a resource group directory

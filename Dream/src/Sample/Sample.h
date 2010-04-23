@@ -1,9 +1,12 @@
 /************************************************************************
-filename: 	Sample.cpp
-created:	2010/3/21
-author:		Yulei
+	filename: 	Sample.cpp
+	created:	2010/3/21
+	author:		Yu Lei(nl-nl-@163.com)
+	<change list>
+	1. create file (Yu Lei)
 
-purpose:	Create First Win32 Window
+
+	purpose:	Create First Win32 Window
 ************************************************************************/
 //------------------------------------------------------------------------
 #ifndef YGE_HELLOWORLD_H
@@ -17,9 +20,10 @@ public:
 	YGEGame( );
 	~YGEGame( ){ }
 
-	virtual bool Init( );
-	virtual bool Loop( );
-	virtual bool Exit( );
+	virtual int		HandleInput( UINT Message,WPARAM wParam,LPARAM lParam );
+	virtual bool	Init( );
+	virtual bool	Loop( );
+	virtual bool	Exit( );
 
 public:
 
